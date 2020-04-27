@@ -7,63 +7,66 @@
 </head>
 
 <body>
-    <!-- Shortcut buttons -->
-    <div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <button class="nav-link" accesskey="a" title="Voltar para essa lista de atalhos Alt + a" data-toggle="tooltip" data-placement="bottom">Lista de Atalhos<span class="sr-only">Lista de Atalhos</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" title="Ir para a lista de operações Alt + O" data-toggle="tooltip" data-placement="bottom">Lista de Operações<span class="sr-only">Lista de Operações</span></a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <!-- Shortcut buttons -->
-
-    <!-- Code selects -->
-    <div>
-        <div class="container-fluid">
-            <div class="row">
-                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                    <div class="sidebar-sticky">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" accesskey="v" role="Variáveis" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Variáveis
-                                </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <button class="dropdown-item" type="button" onclick="addCodeToScreen({code: `variavel`})">Adicionar</button>
-                        </div>
-            </div>
-            </li>
-            <li class="nav-item">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" accesskey="o" role="Variáveis" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      Operações
-                            </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <button class="dropdown-item" type="button" onclick="addCodeToScreen({code:`if`})">Condição (se)</button>
-                        <button class="dropdown-item" type="button" onclick="addCodeToScreen({code:`while`})">Loop enquanto (while)</button>
-                    </div>
-                </div>
-            </li>
+<!-- Shortcut buttons -->
+<div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <button class="nav-link" accesskey="s" title="Voltar para essa lista de atalhos Alt + a"
+                            data-toggle="tooltip" data-placement="bottom">Lista de Atalhos<span class="sr-only">Lista de Atalhos</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" title="Ir para a lista de operações Alt + O" data-toggle="tooltip"
+                       data-placement="bottom">Lista de Operações<span class="sr-only">Lista de Operações</span></a>
+                </li>
             </ul>
-    </div>
+        </div>
     </nav>
-    <div id="code" class="col-10 code-editor">
-        <div id="main">
+</div>
+<!-- Shortcut buttons -->
 
-        </div>
-        <div id="functions">
+<!-- Code selects -->
+<div>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <button class="dropdown-item" accesskey="v" type="button"
+                                    onclick="addVariable()">Adicionar
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" accesskey="o" role="Variáveis"
+                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                    Operações
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <button class="dropdown-item" type="button" onclick="addCodeToScreen({code:`if`})">
+                                        Condição (se)
+                                    </button>
+                                    <button class="dropdown-item" type="button"
+                                            onclick="addCodeToScreen({code:`while`})">Loop enquanto (while)
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div id="code" class="col-10 code-editor">
+                <div id="main">
 
+                </div>
+                <div id="functions">
+
+                </div>
+            </div>
         </div>
-    </div>
-    </div>
     </div>
     <!-- Code selects -->
 
@@ -73,6 +76,7 @@
     <script src="/javascripts/bootstrap/bootstrap.js"></script>
 
     <script src="/javascripts/shortcuts/shortcuts-events.js"></script>
+    <script src="/javascripts/data-types.js"></script>
     <script src="/javascripts/code-view.js"></script>
 </body>
 

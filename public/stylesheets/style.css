@@ -7,16 +7,16 @@ a {
     color: #00B7FF;
 }
 
-.code-editor {}
+/*.code-editor {}*/
 
-.code-line {
-    border: 1px;
-    border-style: solid;
-    border-color: black;
-}
+/*.code-line {*/
+/*    border: 1px;*/
+/*    border-style: solid;*/
+/*    border-color: black;*/
+/*}*/
 
-.col-1.line-number {
-    background-color: black;
-    color: white;
-    text-align: center;
-}
+/*.col-1.line-number {*/
+/*    background-color: black;*/
+/*    color: white;*/
+/*    text-align: center;*/
+/*}*/

@@ -45,9 +45,14 @@
                 </div>
             </nav>
             <div id="code" class="col-10 code-editor">
-                <div id="main" class="row mt-3">
-
+                <div class="d-flex justify-content-center">
+                    <h4>Workspace</h4>
                 </div>
+                <div id="workspace" class="row m-3" style="background-color: #a3a3a3"></div>
+                <div class="d-flex justify-content-center">
+                    <h4>Área de Trabalho</h4>
+                </div>
+                <div id="main" class="row m-3 m-3" style="background-color: #717171"></div>
                 <div id="functions" class="row">
 
                 </div>
@@ -55,6 +60,35 @@
         </div>
     </div>
     <!-- Code selects -->
+
+    <!-- Where to place the code modal -->
+    <div class="modal fade" id="workspacePositionModal" tabindex="-1" role="dialog"
+         aria-labelledby="workspacePositionModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="workspacePositionModalLabel">Onde colocar variável ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="workspacePositionModalBody">
+                    <div class="form-group">
+                        <label for="workspacePositionModalPositionsSelect">Colocar após: </label>
+                        <select class="form-control" id="workspacePositionModalPositionsSelect">
+                            <!-- To be filled dinamically with options -->
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="workspacePositionModalAddButton">Adicionar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Where to place the code modal -->
 
     <script src="/javascripts/util/jquery-3.5.0.js"></script>
     <script src="/javascripts/util/jquery.hotkeys.js"></script>
@@ -64,7 +98,9 @@
     <script src="/javascripts/shortcuts/shortcuts-events.js"></script>
     <script src="/javascripts/data-types.js"></script>
     <script src="/javascripts/code-view.js"></script>
-    <script src="/javascripts/modules/variables.js"></script>
+    <script src="/javascripts/modules/variables/util-variables.js"></script>
+    <script src="/javascripts/modules/variables/main-variables.js"></script>
+    <script src="/javascripts/modules/variables/workspace-variables.js"></script>
 </body>
 
 </html>

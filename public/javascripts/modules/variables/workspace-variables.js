@@ -1,12 +1,23 @@
 let creatingVariable = false;
 
+/*
+* Workspace position modal attributes
+*/
+let $workspacePositionModal = $("#workspacePositionModal");
+let $workspacePositionModalBody = $("#workspacePositionModalBody");
+let $workspacePositionModalPositionsSelect = $("#workspacePositionModalPositionsSelect");
+
+let workspaceToBeAddId = null;
+let workspaceToBeAddVariable = null;
+let workspaceToBeAddAfterComponent = null;
+
 function addVariable(variable = {name: "", type: dataTypes.String, value: ""}, id = null) {
     if (creatingVariable === false) {
         // Blocking future variable creation until finish the current creation
         creatingVariable = true;
 
         let html = "";
-        html += `<div class="col-3" id="variableCreationDiv">`;
+        html += `<div class="col-3 p-2" id="variableCreationDiv">`;
         html += `    <div class="card">`;
         html += `        <div class="card-header">`;
         html += `            <h3>Adicionar variável</h3>`;
@@ -17,7 +28,7 @@ function addVariable(variable = {name: "", type: dataTypes.String, value: ""}, i
         html += `                    <label for="variableName">Nome: </label>`;
         html += `                </div>`;
         html += `                <div class="col-9">`;
-        html += `                    <input id="varibaleName" type="text" value="${variable.name}">`;
+        html += `                    <input id="variableName" type="text" value="${variable.name}">`;
         html += `                </div>`;
         html += `            </div>`;
         html += `            <div class="row">`;
@@ -48,31 +59,29 @@ function addVariable(variable = {name: "", type: dataTypes.String, value: ""}, i
         html += `        <div class="card-footer">`;
         html += `            <div class="row">`;
         html += `                <div class="col-6">`;
-        html += `                    <button type="button" accesskey="c" onclick="cancelAddVariable(${id})">Cancelar</button>`;
+        html += `                    <button type="button" class="btn btn-warning" accesskey="c" onclick="cancelAddVariable(${id})">Cancelar</button>`;
         html += `                </div>`;
         html += `                <div class="col-6">`;
-        html += `                    <button type="button" accesskey="s" onclick="addVariableTocode({id: ${id}})">Salvar</button>`;
+        html += `                    <button type="button" class="btn btn-info" accesskey="s" onclick="addVariableToCode({id: ${id}})">Salvar</button>`;
         html += `                </div>`;
         html += `            </div>`;
         html += `        </div>`;
         html += `    </div>`;
         html += `</div>`;
-        $main.append(html);
+        $workspace.append(html);
     }
 }
 
-function addVariableTocode({id = null}) {
+function addVariableToCode({id = null}) {
     let code = "";
 
     let variable = {
-        name: $("#varibaleName").val(),
+        name: $("#variableName").val(),
         type: $("#variableType").val(),
         value: $("#variableValue").val()
     };
 
-    let variableBarrier = getVariableTypeBarrier(variable.type);
-
-    code += `${variable.type} ${variable.name} = ${variableBarrier}${variable.value}${variableBarrier}`;
+    code = mountCodeFromVariable(variable);
 
     // Sending code to screen
     addCodeToScreen({id: id, code: code, variable: variable});
@@ -114,10 +123,12 @@ function addCodeToScreen({
 
     if (id != null) {
         $(`#mainCode${id}`).html(`<span>${code}</span>`);
+        $(`#globalMenu${id}`).val(code);
         $(`#editCode${id}`).html(`<button type="button" id="editCodeButton${id}" onclick='editVariable(${id}, ${JSON.stringify(variable)})'>Editar</button>`);
         $(`#variableDiv${id}`).show();
     } else {
         html += `<div class="col-3 p-2" id="variableDiv${universalId}">`;
+        html += `    <input type="hidden" id="globalMenu${universalId}" value="${code}"/>`;
         html += `    <div class="card" id="variableCard${universalId}">`;
         html += `        <div class="card-header" id="variableCardHeader${universalId}">`;
         html += `            <h4>Variável</h4>`;
@@ -130,20 +141,67 @@ function addCodeToScreen({
         html += `        </div>`;
         html += `        <div class="card-footer" id="variableCardFooter${universalId}">`;
         html += `            <div class="row">`;
-        html += `                <div class="col-6" id="deleteCode${universalId}">`;
-        html += `                    <button type="button" id="deleteCodeButton${universalId}" onclick="deleteVariable(${universalId})">Deletar</button>`;
+        html += `                <div class="col-3" id="deleteCode${universalId}">`;
+        html += `                    <button type="button" class="btn btn-danger" id="deleteCodeButton${universalId}" onclick="deleteVariable(${universalId})">Deletar</button>`;
         html += `                </div>`;
-        html += `                <div class="col-6" id="editCode${universalId}">`;
-        html += `                    <button type="button" id="editCodeButton${universalId}" onclick='editVariable(${universalId}, ${JSON.stringify(variable)})'>Editar</button>`;
+        html += `                <div class="col-4 align-self-center" id="editCode${universalId}">`;
+        html += `                    <button type="button" class="btn btn-dark" id="editCodeButton${universalId}" onclick='askWhereToPlaceTheVariable(${universalId}, ${JSON.stringify(variable)})'>Posicionar</button>`;
+        html += `                </div>`;
+        html += `                <div class="col-3" id="editCode${universalId}">`;
+        html += `                    <button type="button" class="btn btn-info" id="editCodeButton${universalId}" onclick='editVariable(${universalId}, ${JSON.stringify(variable)})'>Editar</button>`;
         html += `                </div>`;
         html += `            </div>`;
         html += `        </div>`;
         html += `    </div>`;
         html += `</div>`;
 
-        $main.append(html);
+        $workspace.append(html);
     }
 
     // Increasing universal id
     universalId += 1;
 }
+
+function askWhereToPlaceTheVariable(id = null, variable = {name: "", type: "String", value: ""}) {
+    if (buildAllWorkspaceComponentsSelect()) {
+        $workspacePositionModal.modal('toggle');
+        $workspacePositionModalPositionsSelect.focus();
+
+        workspaceToBeAddId = id;
+        workspaceToBeAddVariable = variable;
+    } else {
+        addVariableToMain({id: id, variable: variable});
+    }
+}
+
+function buildAllWorkspaceComponentsSelect() {
+    let allWorkspaceComponents = $(`input[type="hidden"][name="${WORKSPACE_COMPONENTS_NAME}"]`);
+    let selectOptions = [];
+
+    if (allWorkspaceComponents.length > 0) {
+        for (let i = 0; i < allWorkspaceComponents.length; i++) {
+            console.log(allWorkspaceComponents[i].attributes);
+            selectOptions.push(`<option value="${allWorkspaceComponents[i].attributes.universalworkspaceid.value}">${allWorkspaceComponents[i].value}</option>`);
+        }
+
+        $workspacePositionModalPositionsSelect.empty(); // remove old options
+        selectOptions.forEach((object, index, array) => {
+            $workspacePositionModalPositionsSelect.append($(object));
+        })
+
+        return true;
+    } else {
+        return false;
+    }
+}
+
+$("#workspacePositionModalAddButton").click(() => {
+    addVariableToMain({id: workspaceToBeAddId, variable: workspaceToBeAddVariable, afterComponentWithId: $workspacePositionModalPositionsSelect.val()})
+
+    // Reset variables for future use
+    workspaceToBeAddId = null;
+    workspaceToBeAddVariable = null;
+
+    // Hide position modal
+    $workspacePositionModal.modal('toggle');
+});

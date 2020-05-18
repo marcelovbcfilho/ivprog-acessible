@@ -1,4 +1,5 @@
 const $code = $("#code");
+const $workspace = $("#workspace");
 const $main = $("#main");
 const $functions = $("#functions");
 

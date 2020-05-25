@@ -124,7 +124,8 @@ function addCodeToScreen({
     if (id != null) {
         $(`#mainCode${id}`).html(`<span>${code}</span>`);
         $(`#globalMenu${id}`).val(code);
-        $(`#editCode${id}`).html(`<button type="button" id="editCodeButton${id}" onclick='editVariable(${id}, ${JSON.stringify(variable)})'>Editar</button>`);
+        $(`#positionCode${id}`).html(`<button type="button" class="btn btn-dark" id="positionCode${id}" onclick='askWhereToPlaceTheVariable(${id}, ${JSON.stringify(variable)})'>Posicionar</button>`);
+        $(`#editCode${id}`).html(`<button type="button" class="btn btn-info" id="editCodeButton${id}" onclick='editVariable(${id}, ${JSON.stringify(variable)})'>Editar</button>`);
         $(`#variableDiv${id}`).show();
     } else {
         html += `<div class="col-3 p-2" id="variableDiv${universalId}">`;
@@ -141,11 +142,11 @@ function addCodeToScreen({
         html += `        </div>`;
         html += `        <div class="card-footer" id="variableCardFooter${universalId}">`;
         html += `            <div class="row">`;
-        html += `                <div class="col-3" id="deleteCode${universalId}">`;
+        html += `                <div class="col-4" id="deleteCode${universalId}">`;
         html += `                    <button type="button" class="btn btn-danger" id="deleteCodeButton${universalId}" onclick="deleteVariable(${universalId})">Remover</button>`;
         html += `                </div>`;
-        html += `                <div class="col-4 align-self-center" id="editCode${universalId}">`;
-        html += `                    <button type="button" class="btn btn-dark" id="editCodeButton${universalId}" onclick='askWhereToPlaceTheVariable(${universalId}, ${JSON.stringify(variable)})'>Posicionar</button>`;
+        html += `                <div class="col-4 align-self-center" id="positionCode${universalId}">`;
+        html += `                    <button type="button" class="btn btn-dark" id="positionCodeButton${universalId}" onclick='askWhereToPlaceTheVariable(${universalId}, ${JSON.stringify(variable)})'>Posicionar</button>`;
         html += `                </div>`;
         html += `                <div class="col-3" id="editCode${universalId}">`;
         html += `                    <button type="button" class="btn btn-info" id="editCodeButton${universalId}" onclick='editVariable(${universalId}, ${JSON.stringify(variable)})'>Editar</button>`;

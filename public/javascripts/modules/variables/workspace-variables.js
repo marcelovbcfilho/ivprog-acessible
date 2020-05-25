@@ -142,7 +142,7 @@ function addCodeToScreen({
         html += `        <div class="card-footer" id="variableCardFooter${universalId}">`;
         html += `            <div class="row">`;
         html += `                <div class="col-3" id="deleteCode${universalId}">`;
-        html += `                    <button type="button" class="btn btn-danger" id="deleteCodeButton${universalId}" onclick="deleteVariable(${universalId})">Deletar</button>`;
+        html += `                    <button type="button" class="btn btn-danger" id="deleteCodeButton${universalId}" onclick="deleteVariable(${universalId})">Remover</button>`;
         html += `                </div>`;
         html += `                <div class="col-4 align-self-center" id="editCode${universalId}">`;
         html += `                    <button type="button" class="btn btn-dark" id="editCodeButton${universalId}" onclick='askWhereToPlaceTheVariable(${universalId}, ${JSON.stringify(variable)})'>Posicionar</button>`;

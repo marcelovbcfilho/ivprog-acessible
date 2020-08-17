@@ -11,8 +11,6 @@ const dataTypes = {
 };
 
 function getVariableTypeBarrier(dataType) {
-    console.log("Getting barrier for type: " + dataType);
-
     switch (dataType) {
         case 'String':
             return "\"";

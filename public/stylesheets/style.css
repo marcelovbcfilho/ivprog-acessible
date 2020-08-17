@@ -7,16 +7,28 @@ a {
     color: #00B7FF;
 }
 
-/*.code-editor {}*/
+.variable-available-sub-menu {
+    background-color: #80bdff;
+}
 
-/*.code-line {*/
-/*    border: 1px;*/
-/*    border-style: solid;*/
-/*    border-color: black;*/
-/*}*/
+.variable-available-main {
+    background-color: #80bdff;
+    border: 1px solid #646464;
+}
 
-/*.col-1.line-number {*/
-/*    background-color: black;*/
-/*    color: white;*/
-/*    text-align: center;*/
-/*}*/
+.variable-attribution-main {
+    background-color: cornflowerblue;
+    border: 1px solid #646464;
+}
+
+.variable-attribution-sub-menu {
+    background-color: cornflowerblue;
+}
+
+.operation-sub-menu {
+    background-color: #5e1b7c;
+}
+
+.operation-main {
+    background-color: #624e7c;
+}

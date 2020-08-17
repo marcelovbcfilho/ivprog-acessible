@@ -15,13 +15,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <button class="nav-link" accesskey="a" title="Voltar para essa lista de atalhos Alt + a"
-                            data-toggle="tooltip" data-placement="bottom">Lista de Atalhos<span class="sr-only">Lista de Atalhos</span>
+                    <button class="nav-link btn btn-light" accesskey="a"
+                            title="Voltar para essa lista de atalhos Alt + a"
+                            data-toggle="tooltip" data-placement="bottom">Lista de Atalhos<span class="sr-only">Lista de
+                                Atalhos</span>
                     </button>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" title="Ir para a lista de operações Alt + O" data-toggle="tooltip"
-                       data-placement="bottom">Lista de Operações<span class="sr-only">Lista de Operações</span></a>
+                       data-placement="bottom">Lista de Operações<span class="sr-only">Lista de
+                                Operações</span></a>
                 </li>
             </ul>
         </div>
@@ -38,12 +41,39 @@
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <button class="dropdown-item" accesskey="v" type="button"
-                                    onclick="addVariable()">Adicionar
+                                    onclick="buildVariablesSubmenu()">Variáveis
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="dropdown-item" accesskey="v" type="button"
+                                    onclick="buildOperationsSubMenu()">Operações
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-success" accesskey="v" type="button"
+                                    onclick="compile()">Compilar
                             </button>
                         </li>
                     </ul>
                 </div>
             </nav>
+            <div style="position: absolute; display: none; left: 360px; z-index: 1; width: 400px;" id="subMenuOptions">
+                <div class="card">
+                    <div class="card-title" id="subMenuOptionsTitle">
+                        <div class="text-center">
+                            <h3 id="subMenuOptionsTitleH3">Variáveis</h3>
+                        </div>
+                    </div>
+                    <div class="card-body" id="subMenuOptionsBody">
+
+                    </div>
+                    <div class="card-footer" id="subMenuOptionsFooter">
+                        <button type="button" class="btn btn-danger" onclick="subMenuOptions.style.display = 'none';">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
             <div id="code" class="col-10 code-editor">
                 <div class="d-flex justify-content-center">
                     <h4>Workspace</h4>
@@ -88,19 +118,33 @@
             </div>
         </div>
     </div>
-    <!-- Where to place the code modal -->
+</div>
+<!-- Where to place the code modal -->
 
-    <script src="/javascripts/util/jquery-3.5.0.js"></script>
-    <script src="/javascripts/util/jquery.hotkeys.js"></script>
-    <script src="/javascripts/bootstrap/bootstrap.bundle.js"></script>
-    <script src="/javascripts/bootstrap/bootstrap.js"></script>
+<script src="/javascripts/util/jquery-3.5.0.js"></script>
+<script src="/javascripts/util/jquery.hotkeys.js"></script>
+<script src="/javascripts/bootstrap/bootstrap.bundle.js"></script>
+<script src="/javascripts/bootstrap/bootstrap.js"></script>
 
-    <script src="/javascripts/shortcuts/shortcuts-events.js"></script>
-    <script src="/javascripts/data-types.js"></script>
-    <script src="/javascripts/code-view.js"></script>
-    <script src="/javascripts/modules/variables/util-variables.js"></script>
-    <script src="/javascripts/modules/variables/main-variables.js"></script>
-    <script src="/javascripts/modules/variables/workspace-variables.js"></script>
+<script src="/javascripts/shortcuts/shortcuts-events.js"></script>
+<script src="/javascripts/data-types.js"></script>
+<script src="/javascripts/code-view.js"></script>
+<script src="/javascripts/util/sub-menu.js"></script>
+<script src="/javascripts/compiler.js"></script>
+<!--    <script src="/javascripts/modules/main-code-types.js"></script>-->
+
+<script src="/javascripts/modules/variables/util-variables.js"></script>
+<script src="/javascripts/modules/variables/main-variables.js"></script>
+<script src="/javascripts/modules/variables/workspace-variables.js"></script>
+<script src="/javascripts/modules/variables/sub-menu.js"></script>
+
+<script src="/javascripts/modules/operators/operations.js"></script>
+<script src="/javascripts/modules/operators/sub-menu.js"></script>
+<script src="/javascripts/modules/operators/main-operators.js"></script>
+<script src="/javascripts/modules/operators/util-operators.js"></script>
+<script src="/javascripts/modules/operators/workspace-operators.js"></script>
+
+
 </body>
 
 </html>

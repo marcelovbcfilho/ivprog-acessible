@@ -151,7 +151,8 @@
 <script>
     console.log("Keyboard key press debug started")
     $('body').on('keyup', function (e) {
-        console.log(e.target.innerText);
+        console.log("Tecla precionada: " + e.originalEvent.key);
+        console.log("Foco: " + e.target.innerText);
     });
 </script>
 

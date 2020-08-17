@@ -83,8 +83,12 @@
                     <h4>Área de Trabalho</h4>
                 </div>
                 <div id="main" class="row m-3 m-3" style="background-color: #717171"></div>
-                <div id="functions" class="row">
-
+                <div id="functions" class="row"></div>
+                <div id="compiledCode">
+                    <div class="d-flex justify-content-center">
+                        <h4>Código compilado</h4>
+                    </div>
+                    <code type="javascripts" id="compiledJavascriptCode"></code>
                 </div>
             </div>
         </div>
@@ -144,6 +148,12 @@
 <script src="/javascripts/modules/operators/util-operators.js"></script>
 <script src="/javascripts/modules/operators/workspace-operators.js"></script>
 
+<script>
+    console.log("Keyboard key press debug started")
+    $('body').on('keyup', function (e) {
+        console.log(e.target.innerText);
+    });
+</script>
 
 </body>
 

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Express</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="stylesheets/bootstrap/bootstrap-grid.css">
+    <link rel="stylesheet" href="stylesheets/bootstrap/bootstrap-reboot.css">
+</head>
+
+<body>
+<!-- Shortcut buttons -->
+<div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <button class="nav-link btn btn-light" accesskey="a"
+                            title="Voltar para essa lista de atalhos Alt + a"
+                            data-toggle="tooltip" data-placement="bottom">Lista de Atalhos<span class="sr-only">Lista de
+                                Atalhos</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" title="Ir para a lista de operações Alt + O" data-toggle="tooltip"
+                       data-placement="bottom">Lista de Operações<span class="sr-only">Lista de
+                                Operações</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<!-- Shortcut buttons -->
+
+<!-- Code selects -->
+<div>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <button class="dropdown-item" accesskey="v" type="button"
+                                    onclick="buildVariablesSubmenu()">Variáveis
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="dropdown-item" accesskey="v" type="button"
+                                    onclick="buildOperationsSubMenu()">Operações
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-success" accesskey="v" type="button"
+                                    onclick="compile()">Compilar
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div style="position: absolute; display: none; left: 360px; z-index: 1; width: 400px;" id="subMenuOptions">
+                <div class="card">
+                    <div class="card-title" id="subMenuOptionsTitle">
+                        <div class="text-center">
+                            <h3 id="subMenuOptionsTitleH3">Variáveis</h3>
+                        </div>
+                    </div>
+                    <div class="card-body" id="subMenuOptionsBody">
+
+                    </div>
+                    <div class="card-footer" id="subMenuOptionsFooter">
+                        <button type="button" class="btn btn-danger" onclick="subMenuOptions.style.display = 'none';">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="code" class="col-10 code-editor">
+                <div class="d-flex justify-content-center">
+                    <h4>Workspace</h4>
+                </div>
+                <div id="workspace" class="row m-3" style="background-color: #a3a3a3"></div>
+                <div class="d-flex justify-content-center">
+                    <h4>Área de Trabalho</h4>
+                </div>
+                <div id="main" class="row m-3 m-3" style="background-color: #717171"></div>
+                <div id="functions" class="row"></div>
+                <div id="compiledCode">
+                    <div class="d-flex justify-content-center">
+                        <h4>Código compilado</h4>
+                    </div>
+                    <code type="javascripts" id="compiledJavascriptCode"></code>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Code selects -->
+
+    <!-- Where to place the code modal -->
+    <div class="modal fade" id="workspacePositionModal" tabindex="-1" role="dialog"
+         aria-labelledby="workspacePositionModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="workspacePositionModalLabel">Onde colocar variável ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="workspacePositionModalBody">
+                    <div class="form-group">
+                        <label for="workspacePositionModalPositionsSelect">Colocar após: </label>
+                        <select class="form-control" id="workspacePositionModalPositionsSelect">
+                            <!-- To be filled dinamically with options -->
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="workspacePositionModalAddButton">Adicionar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Where to place the code modal -->
+
+<script src="javascripts/util/jquery-3.5.0.js"></script>
+<script src="javascripts/util/jquery.hotkeys.js"></script>
+<script src="javascripts/bootstrap/bootstrap.bundle.js"></script>
+<script src="javascripts/bootstrap/bootstrap.js"></script>
+
+<script src="javascripts/shortcuts/shortcuts-events.js"></script>
+<script src="javascripts/data-types.js"></script>
+<script src="javascripts/code-view.js"></script>
+<script src="javascripts/util/sub-menu.js"></script>
+<script src="javascripts/compiler.js"></script>
+<!--    <script src="/javascripts/modules/main-code-types.js"></script>-->
+
+<script src="javascripts/modules/variables/util-variables.js"></script>
+<script src="javascripts/modules/variables/main-variables.js"></script>
+<script src="javascripts/modules/variables/workspace-variables.js"></script>
+<script src="javascripts/modules/variables/sub-menu.js"></script>
+
+<script src="javascripts/modules/operators/operations.js"></script>
+<script src="javascripts/modules/operators/sub-menu.js"></script>
+<script src="javascripts/modules/operators/main-operators.js"></script>
+<script src="javascripts/modules/operators/util-operators.js"></script>
+<script src="javascripts/modules/operators/workspace-operators.js"></script>
+
+<script>
+    console.log("Keyboard key press debug started")
+    $('body').on('keyup', function (e) {
+        console.log("Tecla precionada: " + e.originalEvent.key);
+        console.log("Foco: " + e.target.innerText);
+    });
+</script>
+
+</body>
+
+</html>
